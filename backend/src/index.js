@@ -1,5 +1,5 @@
 import express from 'express';
-
+import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from './lib/db.js';
 import cookieParser from 'cookie-parser';
@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json()); //this line is required to parse the request body
 app.use(cookieParser()); //this line is required to parse the cookie
+app.use(cors({ credentials: true, origin: 'http://localhost:5173' })); //this line is required to enable CORS
 
 app.use('/api/auth', authRoutes);
 app.use('/api/message', messageRoutes); //this line is required to use the message routes
