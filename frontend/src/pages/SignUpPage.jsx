@@ -146,11 +146,9 @@ const SignUpPage = () => {
         title="Join our community"
         subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
       />
-     
     </div>
     </>
     
   );
 };
-
 export default SignUpPage;

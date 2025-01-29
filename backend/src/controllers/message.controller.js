@@ -1,5 +1,7 @@
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js";
+import cloudinary from "../lib/cloudinary.js";
+import { getReceiverSocketId, io } from "../lib/socket.js";
 
 
 export const getUserSideBar = async (req, res) => {
@@ -11,7 +13,6 @@ export const getUserSideBar = async (req, res) => {
     } catch (error) {
         console.log("Error in getUserSideBar", error.message);
         res.status(500).json({message: "Internal server error"});
-        
     }
 };
 
@@ -47,6 +48,10 @@ export const sendMessage = async (req, res) => {
         const newMessage = new Message({senderID, receiverID, text, media: mediaUrl});
         await newMessage.save();
         //TODO =>socket.io
+        const receiverSocketId = getReceiverSocketId(receiverID);
+        if (receiverSocketId) {
+          io.to(receiverSocketId).emit("newMessage", newMessage);
+        }
         
         res.status(200).json(newMessage);
     } catch (error) {

@@ -27,7 +27,8 @@ const Sidebar = () => {
           <Users className="size-6" />
           <span className="font-medium hidden lg:block">Contacts</span>
         </div>
-        {/* TODO: Online filter toggle */}
+        {/* Online filter toggle */}
+       
         <div className="mt-3 hidden lg:flex items-center gap-2">
           <label className="cursor-pointer flex items-center gap-2">
             <input
@@ -52,7 +53,7 @@ const Sidebar = () => {
               hover:bg-base-300 transition-colors
               ${selectedUser?._id === user._id ? "bg-base-300 ring-1 ring-base-300" : ""}
             `}
-          >
+          > 
             <div className="relative mx-auto lg:mx-0">
               <img
                 src={user.profilePic || "/avatar.png"}
@@ -69,7 +70,7 @@ const Sidebar = () => {
 
             {/* User info - only visible on larger screens */}
             <div className="hidden lg:block text-left min-w-0">
-              <div className="font-medium truncate">{user.fullName}</div>
+              <div className="font-medium truncate">{user.fullname}</div>
               <div className="text-sm text-zinc-400">
                 {onlineUsers.includes(user._id) ? "Online" : "Offline"}
               </div>
